@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIS Interference Guard - Clinical Decision Support</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <div class="brand">
+        <div class="sys-badge">LIS CORE v2.4</div>
+        <h1>Interference & Clinical Validation Guard</h1>
+      </div>
+      <p>Automated telemetry for pre-analytical flags, spectral interferences & delta checks</p>
+    </header>
+
+    <!-- Patient Metadata Top Cards (المربعات الثلاثة) -->
+    <div class="patient-cards-grid">
+      <div class="meta-card">
+        <div class="meta-label">PATIENT NAME</div>
+        <div class="meta-value" id="dispName">---</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">PATIENT AGE</div>
+        <div class="meta-value" id="dispAge">---</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label">FILE NUMBER</div>
+        <div class="meta-value" id="dispFile">---</div>
+      </div>
+    </div>
+
+    <!-- Upload Dropzone -->
+    <div class="upload-section" id="dropZone">
+      <div class="upload-content">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+        <p>Drop LIS capture here or <span>browse local file</span></p>
+        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+      </div>
+      <img id="imagePreview" class="preview-box" alt="LIS Screen Ingestion">
+    </div>
+
+    <div id="statusMessage" class="status-box">SYSTEM READY: AWAITING LIS INGESTION</div>
+
+    <!-- Collapsible LIS Notes Section (خانة الملاحظات) -->
+    <div class="notes-panel-wrapper" id="notesWrapper">
+      <button class="notes-toggle-btn" id="notesToggleBtn">
+        <span id="notesBadge">LIS NOTES & ANALYZER ALERTS</span>
+        <span class="indicator">&#9662; Click to Toggle</span>
+      </button>
+      <div class="notes-content" id="notesContent">
+        <p id="dispNotes">No notes identified from the ingestion buffer.</p>
+      </div>
+    </div>
+
+    <!-- Bottom Dashboard -->
+    <div class="dashboard-grid">
+      <div class="alerts-panel">
+        <div class="panel-header">
+          <h2>Clinical Validation & Diagnostic Flags</h2>
+        </div>
+        <div id="alertsContainer">
+          <p class="placeholder-text">Ingest an LIS screen to evaluate clinical decision rules...</p>
+        </div>
+      </div>
+
+      <div class="raw-panel">
+        <div class="panel-header">
+          <h2>Parsed OCR Stream</h2>
+        </div>
+        <pre id="rawText">No incoming data stream.</pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
